@@ -1,32 +1,35 @@
 import random
 import math
 
-s = 0
-d = {}
+sum_of_square_roots_of_lines = 0
+dictionary_of_number_sequences = {}
 with open('100.txt') as f:
-    for a in f:
-        p = ''
-        for b in a:
-            a_s = a.strip()
-            if b != ',':
-                p += b
+    for line in f:
+        constructed_number_in_line = ''
+        for character in line:
+            line_no_spaces = line.strip()
+            if character != ',':
+                constructed_number_in_line += character
             else:
-                if a_s not in d:
-                    d[a_s] = int(p)
+                if line_no_spaces not in dictionary_of_number_sequences:
+                    dictionary_of_number_sequences[line_no_spaces] = int(constructed_number_in_line)
                 else:
-                    d[a_s] += int(p)
-                p = ''
-        if a_s not in d:
-            d[a_s] = int(p)
+                    dictionary_of_number_sequences[line_no_spaces] += int(constructed_number_in_line)
+                constructed_number_in_line = ''
+        if line_no_spaces not in dictionary_of_number_sequences:
+            dictionary_of_number_sequences[line_no_spaces] = int(constructed_number_in_line)
         else:
-            d[a_s] += int(p)
+            dictionary_of_number_sequences[line_no_spaces] += int(constructed_number_in_line)
 
-s += math.sqrt(d['23,21,5'])
-s += math.sqrt(d['342,2,5'])
-s += math.sqrt(d['32,1,777'])
-s += math.sqrt(d['234,645,223'])
-s += math.sqrt(d['243,646,2342'])
-s += math.sqrt(d['6346,3434,222'])
-s += math.sqrt(d['3,6,2'])
 
-print(s)
+for i in dictionary_of_number_sequences:
+    sum_of_square_roots_of_lines += math.sqrt(dictionary_of_number_sequences[i])
+# sum_of_square_roots_of_lines += math.sqrt(dictionary_of_number_sequences['23,21,5'])
+# sum_of_square_roots_of_lines += math.sqrt(dictionary_of_number_sequences['342,2,5'])
+# sum_of_square_roots_of_lines += math.sqrt(dictionary_of_number_sequences['32,1,777'])
+# sum_of_square_roots_of_lines += math.sqrt(dictionary_of_number_sequences['234,645,223'])
+# sum_of_square_roots_of_lines += math.sqrt(dictionary_of_number_sequences['243,646,2342'])
+# sum_of_square_roots_of_lines += math.sqrt(dictionary_of_number_sequences['6346,3434,222'])
+# sum_of_square_roots_of_lines += math.sqrt(dictionary_of_number_sequences['3,6,2'])
+
+print(sum_of_square_roots_of_lines)
